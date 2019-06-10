@@ -45,13 +45,14 @@ for (var i = 0; i < venues.length; i++) {
     yale.push(venues[i]);
     delete venues[i];
   } else if (venues[i].charAt(0) == 'E' 
-    || (venues[i].charAt(0) == 'C' && venues[i].charAt(1) == 'E' && venues[i].charAt(2) == 'L')) {
+    || (venues[i].charAt(0) == 'C' && venues[i].charAt(1) == 'E' && venues[i].charAt(2) == 'L' && venues[i].charAt(3) == 'C')) {
     engineering.push(venues[i]);
     delete venues[i];
   } else if (venues[i].charAt(0) == 'S') {
     science.push(venues[i]);
     delete venues[i];
-  }  else if (venues[i].charAt(0) == 'M' && venues[i].charAt(1) == 'D') {
+  }  else if ((venues[i].charAt(0) == 'M' && venues[i].charAt(1) == 'D')
+    || (venues[i].charAt(0) == 'C' && venues[i].charAt(1) == 'E' && venues[i].charAt(2) == 'L' && venues[i].charAt(3) == 'S')) {
     med.push(venues[i]);
     delete venues[i];
     } else if (venues[i].charAt(0) == 'Y' && venues[i].charAt(1) == 'S') {
