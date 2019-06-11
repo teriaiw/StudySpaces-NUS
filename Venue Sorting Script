@@ -80,7 +80,7 @@ var venues = ["LT17", "BIZ2-0117", "BIZ2-0404", "BIZ2-0118", "BIZ2-0301", "LT16"
 
   var rest = []; // exclude halls, ISS (Institute of system science), exclude akimaud
 
-  var faculty = [computing, arts, science, business, engineering, design, utown, yale, med, music];
+  var faculty = [computing, arts, science, business, engineering, design, utown, rvrc, yale, med, music];
 
   for (var i = 0; i < venues.length; i++) {
     if (venues[i].charAt(0) == 'C' && venues[i].charAt(1) == 'O' && venues[i].charAt(2) == 'M' || venues[i].charAt(0) == 'I' && venues[i].charAt(1) == '3') {
@@ -167,7 +167,7 @@ var venues = ["LT17", "BIZ2-0117", "BIZ2-0404", "BIZ2-0118", "BIZ2-0301", "LT16"
       } else if (venues[i].charAt(1) == '8') {
         s8.push(venues[i]);
       } else {
-        console.log(venues[i]); //ignore st_lt19 and sh-sr1
+        //console.log(venues[i]); //ignore st_lt19 and sh-sr1
       }
     } else if (venues[i].charAt(0) == 'E') {
       if (venues[i].charAt(1) == '1') {
@@ -189,7 +189,7 @@ var venues = ["LT17", "BIZ2-0117", "BIZ2-0404", "BIZ2-0118", "BIZ2-0301", "LT16"
       } else if (venues[i].charAt(1) == 'W' || venues[i].charAt(2) == '2') {
         ew2.push(venues[i]);
       } else {
-        console.log(venues[i]);
+        //console.log(venues[i]);
       }
 
 
@@ -285,5 +285,8 @@ var venues = ["LT17", "BIZ2-0117", "BIZ2-0404", "BIZ2-0118", "BIZ2-0301", "LT16"
   //console.log(music);
   //console.log(law);
 
-  console.log(rest);
+  //console.log(rest);
   //console.log(faculty);
+  
+  console.log(faculty[3][1][2]);
+  console.log(biz2);
