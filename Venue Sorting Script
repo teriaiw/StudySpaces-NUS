@@ -232,7 +232,7 @@ var venues = ["LT17", "BIZ2-0117", "BIZ2-0404", "BIZ2-0118", "BIZ2-0301", "LT16"
   as1.push("LT9");
   as2.push("LT12","LT11","LT13")
   lt27.push("LT27", "LT28", "LT29")
-  s17.push("LT34");
+  s17.push("LT34", "LT33");
   s1.push("LT32");
   s16.push("LT31")
   s3.push("LT20");
@@ -269,6 +269,7 @@ var venues = ["LT17", "BIZ2-0117", "BIZ2-0404", "BIZ2-0118", "BIZ2-0301", "LT16"
   delete rest[42];
   delete rest[43];
   delete rest[45];
+  delete rest[8];
   
   //console.log(venues);
   //console.log(computing);
