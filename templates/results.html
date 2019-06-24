@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+  <h1>Rooms Available</h1>
+    <table>
+      <tr>
+        <th>Building</th>
+        <th>Venue</th>
+      </tr>
+
+        {% for venue in venues %}
+        <tr>
+          <td>{{venue[0]}}</td>
+          <td>{{venue}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</body>
+</html>

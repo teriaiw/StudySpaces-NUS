@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST">
+    {{ form.csrf_token }}
+    {{ form.faculty }}
+    {{ form.building }}
+    {{ form.time }}
+    <input type="submit">
+    </form>
+
+    <script>
+        var faculty_select = document.getElementById("faculty");
+        var building_select = document.getElementById("building");
+
+        faculty_select.onchange = function()  {
+
+            faculty = faculty_select.value;
+
+            fetch('/building/' + faculty).then(function(response) {
+
+                response.json().then(function(data) {
+                    var optionHTML = '';
+
+                    for (var building of data.cities) {
+                        optionHTML += '<option value="' + building.id + '">' + building.name + '</option>';
+                    }
+
+                    building_select.innerHTML = optionHTML;
+                })
+
+            });
+        }
+    </script>
+</body>
+</html>
