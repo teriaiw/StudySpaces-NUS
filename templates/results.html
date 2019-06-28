@@ -19,7 +19,7 @@
           <td>{{venue[0]}}</td>
           <td>{{venue[1]}}</td>
           <td>{{0}}</td>
-          <td><a href="{{url_for('map')}}" target = "_blank"> Map</a></td>
+          <td><a href="{{url_for('map',building=venue[0])}}" target = "_blank"> Map</a></td>
         </tr>
         {% endfor %}
 

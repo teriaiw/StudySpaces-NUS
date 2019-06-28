@@ -226,20 +226,18 @@ def building(faculty):
 
     return jsonify({'cities' : buildingArray})
 
-@app.route('/map')
-def map():
-    m = folium.Map(location =[1.295141, 103.773875], zoom_start = 20)
+location_data = {
+'Com1' : [1.295164,103.773871],
+'Com2' : [1.294334, 103.774111],
+'I3' : [1.292920, 103.775389]
+}
+@app.route('/map/<string:building>')
 
-    tooltip = 'this building'
+def map(building):
+    if building in location_data:
 
-    folium.Marker([1.295141, 103.773875],
-    popup ='<strong> com1 </strong>',
-    tooltip = tooltip).add_to(m)
-
-    m.save('map.html')
-    return render_template('map.html')
-
-
+        return render_template('map.html', x =location_data[building][0], y =location_data[building][1])
+    return 'no map'
 
 
 if __name__ == '__main__':
