@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 from flask_wtf import FlaskForm
 from wtforms import SelectField
 import requests
@@ -120,23 +121,23 @@ faculties = {
 }
 
 def get_time():
-    time = []
-    for i in range(6,24):
-        time.append(('{i:02d}00'.format(i=i),'{i:02d}00'.format(i=i)))
-        time.append(('{i:02d}30'.format(i=i),'{i:02d}30'.format(i=i)))
-    return time
+	time = []
+	for i in range(6,24):
+		time.append(('{i:02d}00'.format(i=i),'{i:02d}00'.format(i=i)))
+		time.append(('{i:02d}30'.format(i=i),'{i:02d}30'.format(i=i)))
+	return time
 
 class Building(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    faculty = db.Column(db.String(50))
-    name = db.Column(db.String(50))
+	id = db.Column(db.Integer, primary_key=True)
+	faculty = db.Column(db.String(50))
+	name = db.Column(db.String(50))
 
 class Form(FlaskForm):
-    faculty = SelectField('faculty', choices=[('Com', 'Computing'), ('Arts', 'Arts'),
-    ('Sci','Science'),('Biz', 'Business'),('Eng', 'Engineering'),('Dsgn', 'Design'),
-    ('Utwn', "Utown"), ('RVRC', "RVRC"), ('Yale', 'Yale'), ('Med', "Medicine"), ('Music', "Music")])
-    building = SelectField('building', choices=[])
-    time = SelectField('time', choices = get_time())
+	faculty = SelectField('faculty', choices=[('Com', 'Computing'), ('Arts', 'Arts'),
+	('Sci','Science'),('Biz', 'Business'),('Eng', 'Engineering'),('Dsgn', 'Design'),
+	('Utwn', "Utown"), ('RVRC', "RVRC"), ('Yale', 'Yale'), ('Med', "Medicine"), ('Music', "Music")])
+	building = SelectField('building', choices=[])
+	time = SelectField('time', choices = get_time())
 
 class Slot():
 	def __init__(self, code, name, slot):
@@ -150,81 +151,81 @@ class Slot():
 		self.day = slot.get("DayText")
 		self.week = slot.get("WeekText")
 
-        def str():
-            return self.venue + ''
+		def str():
+			return self.venue + ''
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    form = Form()
-    form.building.choices = [(building.id, building.name) for building in Building.query.filter_by(faculty='Com').all()]
+	form = Form()
+	form.building.choices = [(building.id, building.name) for building in Building.query.filter_by(faculty='Com').all()]
 
-    venues = []
-    names = []
-    venues_final = []
+	venues = []
+	names = []
+	venues_final = []
 
-    #get results to show, database entry w buildings, when search button is pressed -> all venues in that faculty is searched, sort result by building
-    if request.method == 'POST':
+	#get results to show, database entry w buildings, when search button is pressed -> all venues in that faculty is searched, sort result by building
+	if request.method == 'POST':
 
-        if str(form.faculty.data) in faculties:
-            venue_data = faculties[str(form.faculty.data)]
+		if str(form.faculty.data) in faculties:
+			venue_data = faculties[str(form.faculty.data)]
 
-            for buildings in venue_data:
-                building_name = buildings
-                building_size = len(venue_data[str(building_name)])
-                for x in range(building_size):
-                    venues.append((building_name,venue_data[str(building_name)][x]))
+			for buildings in venue_data:
+				building_name = buildings
+				building_size = len(venue_data[str(building_name)])
+				for x in range(building_size):
+					venues.append((building_name,venue_data[str(building_name)][x]))
 
-        #return render_template('results.html', venues=venues)
+		#return render_template('results.html', venues=venues)
 
-        building = Building.query.filter_by(id=form.building.data).first()
-        #take all venues from database
-        for mod in timetable:
-            name = mod.get("ModuleCode")
-            for slot in mod.get("Timetable", ()):
-                venue = slot.get("Venue")
-                if ((slot.get("StartTime") <= form.time.data <= slot.get("EndTime"))
-                and (slot.get("DayText") == day)):
-                    for x in range(len(venues)-1):
-                        if venues[x][1] == slot.get("Venue"):
-                            del venues[x] #tuple
-                            names.append((name , slot.get("Venue")))
-                    #names.append(name)
+		building = Building.query.filter_by(id=form.building.data).first()
+		#take all venues from database
+		for mod in timetable:
+			name = mod.get("ModuleCode")
+			for slot in mod.get("Timetable", ()):
+				venue = slot.get("Venue")
+				if ((slot.get("StartTime") <= form.time.data <= slot.get("EndTime"))
+				and (slot.get("DayText") == day)):
+					for x in range(len(venues)-1):
+						if venues[x][1] == slot.get("Venue"):
+							del venues[x] #tuple
+							names.append((name , slot.get("Venue")))
+					#names.append(name)
 
-        #return render_template('results.html', venues=names)
-        end_time = 0
-        for mod in timetable:
-            for slot in mod.get("Timetable", ()):
-                venue == slot.get("Venue")
-                for x in range(len(venues)-1):
+		#return render_template('results.html', venues=names)
+		end_time = 0
+		for mod in timetable:
+			for slot in mod.get("Timetable", ()):
+				venue == slot.get("Venue")
+				for x in range(len(venues)-1):
 
-                    if (venue == venues[x][1]):
-                        end_time = 5
-                        venues_final.append((venues[x],venue))
-
-
-        #return render_template('results.html', venues=names)
-        return render_template('results.html', venues=venues)
-        #return results[1] + ''
-                #return jsonify({'time' :timetable}) #testing if can access url
-        #return '<h1>Faculty: {}, Building: {}, Time requested: {}</h1>'.format(form.faculty.data, building.name, form.time.data)
+					if (venue == venues[x][1]):
+						end_time = 5
+						venues_final.append((venues[x],venue))
 
 
-    return render_template('index.html', form=form)
+		#return render_template('results.html', venues=names)
+		return render_template('results.html', venues=venues)
+		#return results[1] + ''
+				#return jsonify({'time' :timetable}) #testing if can access url
+		#return '<h1>Faculty: {}, Building: {}, Time requested: {}</h1>'.format(form.faculty.data, building.name, form.time.data)
+
+
+	return render_template('index.html', form=form)
 
 @app.route('/building/<faculty>')
 def building(faculty):
-    cities = Building.query.filter_by(faculty=faculty).all()
+	cities = Building.query.filter_by(faculty=faculty).all()
 
-    buildingArray = []
+	buildingArray = []
 
-    for building in cities:
-        buildingObj = {}
-        buildingObj['id'] = building.id
-        buildingObj['name'] = building.name
-        buildingArray.append(buildingObj)
+	for building in cities:
+		buildingObj = {}
+		buildingObj['id'] = building.id
+		buildingObj['name'] = building.name
+		buildingArray.append(buildingObj)
 
-    return jsonify({'cities' : buildingArray})
+	return jsonify({'cities' : buildingArray})
 
 location_data = {
 'Com1' : [1.295164, 103.773871],
@@ -284,11 +285,11 @@ location_data = {
 @app.route('/map/<string:building>')
 
 def map(building):
-    if building in location_data:
+	if building in location_data:
 
-        return render_template('map.html', x =location_data[building][0], y =location_data[building][1])
-    return 'no map'
-
+		return render_template('map.html', x =location_data[building][0], y =location_data[building][1])
+	return 'no map'
+	
 
 if __name__ == '__main__':
-    app.run(debug=True)
+	app.run(debug=True)
