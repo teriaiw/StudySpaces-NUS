@@ -5,11 +5,14 @@
     <title>Document</title>
 </head>
 <body>
+    <strong>Choose your current location and click submit!</strong> <br>
+    Current day:{{day}}
     <form method="POST">
     {{ form.csrf_token }}
     {{ form.faculty }}
     {{ form.building }}
     {{ form.time }}
+    {{ form.days }}
     <input type="submit">
     </form>
 

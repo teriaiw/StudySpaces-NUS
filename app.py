@@ -5,6 +5,9 @@ from wtforms import SelectField
 import requests
 import json
 import folium
+import datetime
+
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -15,7 +18,6 @@ db = SQLAlchemy(app)
 ACAD_YEAR = "2018-2019"
 SEM = "1"
 URL = "http://api.nusmods.com/{}/{}/timetable.json".format(ACAD_YEAR, SEM)
-day = "Monday" #adjust clock here
 MODSdata = requests.get(URL)
 timetable = MODSdata.json();
 
@@ -137,6 +139,7 @@ class Form(FlaskForm):
     ('Utwn', "Utown"), ('RVRC', "RVRC"), ('Yale', 'Yale'), ('Med', "Medicine"), ('Music', "Music")])
     building = SelectField('building', choices=[])
     time = SelectField('time', choices = get_time())
+    days = SelectField('days', choices = [(" "," "), ("Monday","Monday"), ("Tuesday", "Tuesday"), ("Wednesday", "Wednesday"), ("Thursday", "Thursday"), ("Friday", "Friday"), ("Saturday", "Saturday"), ("Sunday", "Sunday")])
 
 class Slot():
 	def __init__(self, code, name, slot):
@@ -150,21 +153,29 @@ class Slot():
 		self.day = slot.get("DayText")
 		self.week = slot.get("WeekText")
 
-        def str():
-            return self.venue + ''
+		def str():
+			return self.venue + ''
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    
     form = Form()
     form.building.choices = [(building.id, building.name) for building in Building.query.filter_by(faculty='Com').all()]
 
     venues = []
     names = []
     venues_final = []
+    day = ''
 
     #get results to show, database entry w buildings, when search button is pressed -> all venues in that faculty is searched, sort result by building
     if request.method == 'POST':
+
+        if form.days.data == ' ':
+            day = datetime.date.today().strftime("%A")
+        else:
+            day = form.days.data
+
 
         if str(form.faculty.data) in faculties:
             venue_data = faculties[str(form.faculty.data)]
@@ -210,7 +221,7 @@ def index():
         #return '<h1>Faculty: {}, Building: {}, Time requested: {}</h1>'.format(form.faculty.data, building.name, form.time.data)
 
 
-    return render_template('index.html', form=form)
+    return render_template('index.html', form=form, day = day)
 
 @app.route('/building/<faculty>')
 def building(faculty):
