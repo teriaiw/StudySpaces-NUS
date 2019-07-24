@@ -19,7 +19,7 @@ ACAD_YEAR = "2018-2019"
 SEM = "1"
 URL = "http://api.nusmods.com/{}/{}/timetable.json".format(ACAD_YEAR, SEM)
 MODSdata = requests.get(URL)
-timetable = MODSdata.json();
+timetable = MODSdata.json()
 
 venue_data_computing = {
 'Com1' :[ "COM1-0217", "COM1-0216", "COM1-B110", "COM1-0212", "COM1-VCRM", "COM1-0114", "COM1-0204", "COM1-0113", "COM1-0207", "COM1-0120", "COM1-0209", "COM1-B111", "COM1-B112", "COM1-B108", "COM1-B109", "COM1-0218", "COM1-0203", "COM1-0208", "COM1-0201", "COM1-0210", "COM1-B103", "COM1-0206", "COM1-B113", "COM1-B102" ],
@@ -165,7 +165,7 @@ def index():
 
     venues = []
     names = []
-    venues_final = []
+    venues_next_use = []
     day = ''
 
     #get results to show, database entry w buildings, when search button is pressed -> all venues in that faculty is searched, sort result by building
@@ -176,7 +176,6 @@ def index():
         else:
             day = form.days.data
 
-
         if str(form.faculty.data) in faculties:
             venue_data = faculties[str(form.faculty.data)]
 
@@ -186,36 +185,46 @@ def index():
                 for x in range(building_size):
                     venues.append((building_name,venue_data[str(building_name)][x]))
 
+                    #get all venue in the building
         #return render_template('results.html', venues=venues)
 
         building = Building.query.filter_by(id=form.building.data).first()
         #take all venues from database
+
         for mod in timetable:
             name = mod.get("ModuleCode")
             for slot in mod.get("Timetable", ()):
-                venue = slot.get("Venue")
                 if ((slot.get("StartTime") <= form.time.data <= slot.get("EndTime"))
                 and (slot.get("DayText") == day)):
                     for x in range(len(venues)-1):
-                        if venues[x][1] == slot.get("Venue"):
-                            del venues[x] #tuple
+                        if venues[x][1] == slot.get("Venue"): #filter by time and day then check if venue in venues
+                            del venues[x] #tuple, delete because venue is in use
                             names.append((name , slot.get("Venue")))
-                    #names.append(name)
+                    #names is the checker list for milestone 2
+
+        venues_next_use = venues.copy()
+        end_time_list = []
+        start_time = int(form.time.data)
+        #for venues in venues_next_use, check day, check the next start time after form.time , subtract to find hours
+        for venue in venues_next_use:
+            end_time = 2400
+            taken_by = ""
+            for mod in timetable:
+                name = mod.get("ModuleCode")
+                for slot in mod.get("Timetable", ()):
+                    if form.time.data <= slot.get("StartTime") and (slot.get("DayText") == day) and slot.get("Venue") == venue[1] and int(slot.get("StartTime")) < end_time and slot.get("Venue") != None:
+                        end_time = int(slot.get("StartTime"))
+                        taken_by =  (str(end_time), name)
+                        #taken_by = mod.get("ModuleCode")
+                        #cant use moduleCode to find next class because JSON cant seem to be filtered by None
+            if taken_by == "":
+                end_time_list.append(("2400","No More Classes"))
+            else:
+                end_time_list.append(taken_by)
+                        
 
         #return render_template('results.html', venues=names)
-        end_time = 0
-        for mod in timetable:
-            for slot in mod.get("Timetable", ()):
-                venue == slot.get("Venue")
-                for x in range(len(venues)-1):
-
-                    if (venue == venues[x][1]):
-                        end_time = 5
-                        venues_final.append((venues[x],venue))
-
-
-        #return render_template('results.html', venues=names)
-        return render_template('results.html', venues=venues)
+        return render_template('results.html', results = zip(venues, end_time_list), list_size = len(end_time_list))
         #return results[1] + ''
                 #return jsonify({'time' :timetable}) #testing if can access url
         #return '<h1>Faculty: {}, Building: {}, Time requested: {}</h1>'.format(form.faculty.data, building.name, form.time.data)

@@ -1,4 +1,3 @@
-import datetime
-
-print(datetime.date.today().strftime("%A"))
-
+venue = []
+venue.append((0,1))
+print(venue[0][1])
