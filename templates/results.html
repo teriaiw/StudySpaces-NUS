@@ -10,16 +10,18 @@
       <tr>
         <th>Building</th>
         <th>Venue</th>
-        <th>Hours</th>
-        <th>Map</th>
+        <th>Next Class Time</th>
+        <th>Next Class Name</th>
+        <th>Map + {{list_size}}</th>
       </tr>
 
-        {% for venue in venues %}
+        {% for i,j in results %}
         <tr>
-          <td>{{venue[0]}}</td>
-          <td>{{venue[1]}}</td>
-          <td>{{0}}</td>
-          <td><a href="{{url_for('map',building=venue[0])}}" target = "_blank"> Map</a></td>
+          <td>{{i[0]}}</td>
+          <td>{{i[1]}}</td>
+          <td>{{j[0]}}</td>
+          <td>{{j[1]}}</td>
+          <td><a href="{{url_for('map',building=i[0])}}" target = "_blank"> Map</a></td>
         </tr>
         {% endfor %}
 
