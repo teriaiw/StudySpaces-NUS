@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, Blueprint
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_wtf import FlaskForm
@@ -6,8 +6,6 @@ from wtforms import SelectField
 import requests
 import json
 import folium
-
-#hello
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -20,7 +18,7 @@ SEM = "1"
 URL = "http://api.nusmods.com/{}/{}/timetable.json".format(ACAD_YEAR, SEM)
 day = "Monday" #adjust clock here
 MODSdata = requests.get(URL)
-timetable = MODSdata.json();
+timetable = MODSdata.json()
 
 venue_data_computing = {
 'Com1' :[ "COM1-0217", "COM1-0216", "COM1-B110", "COM1-0212", "COM1-VCRM", "COM1-0114", "COM1-0204", "COM1-0113", "COM1-0207", "COM1-0120", "COM1-0209", "COM1-B111", "COM1-B112", "COM1-B108", "COM1-B109", "COM1-0218", "COM1-0203", "COM1-0208", "COM1-0201", "COM1-0210", "COM1-B103", "COM1-0206", "COM1-B113", "COM1-B102" ],

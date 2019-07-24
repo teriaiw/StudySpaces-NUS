@@ -1,40 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-<body>
-    <form method="POST">
-    {{ form.csrf_token }}
-    {{ form.faculty }}
-    {{ form.building }}
-    {{ form.time }}
-    <input type="submit">
-    </form>
+{% extends "base.html" %}
 
-    <script>
-        var faculty_select = document.getElementById("faculty");
-        var building_select = document.getElementById("building");
+{% block content %}
 
-        faculty_select.onchange = function()  {
+<form method="POST">
+{{ form.csrf_token }}
+{{ form.faculty }}
+{{ form.building }}
+{{ form.time }}
+<input type="submit">
+</form>
 
-            faculty = faculty_select.value;
+<script>
+    var faculty_select = document.getElementById("faculty");
+    var building_select = document.getElementById("building");
 
-            fetch('/building/' + faculty).then(function(response) {
+    faculty_select.onchange = function()  {
 
-                response.json().then(function(data) {
-                    var optionHTML = '';
+        faculty = faculty_select.value;
 
-                    for (var building of data.cities) {
-                        optionHTML += '<option value="' + building.id + '">' + building.name + '</option>';
-                    }
+        fetch('/building/' + faculty).then(function(response) {
 
-                    building_select.innerHTML = optionHTML;
-                })
+            response.json().then(function(data) {
+                var optionHTML = '';
 
-            });
-        }
-    </script>
-</body>
-</html>
+                for (var building of data.cities) {
+                    optionHTML += '<option value="' + building.id + '">' + building.name + '</option>';
+                }
+
+                building_select.innerHTML = optionHTML;
+            })
+
+        });
+    }
+</script>
+{% endblock %}

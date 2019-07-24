@@ -1,28 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-<body>
-  <h1>Rooms Available</h1>
-    <table>
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Rooms Available</h1>
+  <table>
+    <tr>
+      <th>Building</th>
+      <th>Venue</th>
+      <th>Hours</th>
+      <th>Map</th>
+    </tr>
+
+      {% for venue in venues %}
       <tr>
-        <th>Building</th>
-        <th>Venue</th>
-        <th>Hours</th>
-        <th>Map</th>
+        <td>{{venue[0]}}</td>
+        <td>{{venue[1]}}</td>
+        <td>{{0}}</td>
+        <td><a href="{{url_for('map',building=venue[0])}}" target = "_blank"> Map</a></td>
       </tr>
+      {% endfor %}
 
-        {% for venue in venues %}
-        <tr>
-          <td>{{venue[0]}}</td>
-          <td>{{venue[1]}}</td>
-          <td>{{0}}</td>
-          <td><a href="{{url_for('map',building=venue[0])}}" target = "_blank"> Map</a></td>
-        </tr>
-        {% endfor %}
-
-    </table>
-</body>
-</html>
+  </table>
+{% endblock %}
