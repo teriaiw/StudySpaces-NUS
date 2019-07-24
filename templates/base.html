@@ -6,26 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content= "IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>StudySpaces@NUS</title>
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
 <body>
-    <section class="hero is-primary is-fullheight">
-        <div class="hero-head">
-            <nav class="navbar">
-
-                <div id="navbarMenuHeroA" class="navbar-menu">
-                    <div class="navbar-end">
-                        <a href="{{ url_for('index') }}" class="navbar-item">
-                            Home
-                        </a>
-                    </div>
-                </div>
-            </nav>
+    <section>
+        <div>
+            <ul>
+                <li><a class="active" href="{{ url_for('index') }}" class="navbar-item">Home</a></li>
+                <li>Favourites</li>
+            </ul>
         </div>
 
-        <div class="hero-body">
-            <div class="container has-text-centered">
+        <div>
+            <div class="content">
                 {% block content %}
                 {% endblock %}
             </div>
