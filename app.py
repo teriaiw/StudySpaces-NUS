@@ -192,6 +192,12 @@ def index():
         building = Building.query.filter_by(id=form.building.data).first()
         #take all venues from database
 
+        form_data = []
+        if (str(form.days.data) == " "):
+            form_data.append("Showing Free Classrooms in " + str(form.faculty.data) + " at " + str(form.time.data) + " on " + day)
+        else:
+            form_data.append("Showing Free Classrooms in " + str(form.faculty.data) + " at " + str(form.time.data) + " on " + str(form.days.data))
+
         for mod in timetable:
             name = mod.get("ModuleCode")
             for slot in mod.get("Timetable", ()):
@@ -225,7 +231,7 @@ def index():
                         
 
         #return render_template('results.html', venues=names)
-        return render_template('results.html', results = zip(venues, end_time_list), list_size = len(end_time_list))
+        return render_template('results.html', results = zip(venues, end_time_list), list_size = len(end_time_list), form_data = form_data)
         #return results[1] + ''
                 #return jsonify({'time' :timetable}) #testing if can access url
         #return '<h1>Faculty: {}, Building: {}, Time requested: {}</h1>'.format(form.faculty.data, building.name, form.time.data)
