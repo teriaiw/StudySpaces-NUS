@@ -16,7 +16,7 @@
 
 /* The sidepanel links */
 .sidepanel a {
-    padding: 8px 8px 8px 0px;
+    padding: 15px 8px 15px 0px;
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
     text-decoration: none;
@@ -43,12 +43,12 @@
 
 /* Style the button that is used to open the sidepanel */
 .openbtn {
-    font-size: 20px;
+    font-size: 30px;
     cursor: pointer;
     background-color: rgb(19, 52, 90);
     color: white;
-    padding: 10px 15px;
     border: none;
+    margin-left: 4px;
 }
 
 .openbtn:hover {
@@ -70,6 +70,40 @@
     cursor: pointer; /* Add a pointer on hover */
 }
 
+/* The side navigation menu */
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 70px;
+    background-color: rgb(19, 52, 90);
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    align-content: center;
+}
+
+/* Sidebar links */
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 20px 8px 20px 16px;
+    text-decoration: none;
+    border-bottom: 1px solid white;
+}
+
+/* Active/current link */
+.sidebar a.active {
+    background-color: rgb(39, 82, 133);
+    color: white;
+}
+
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+    background-color: rgb(19, 52, 90);
+    color: white;
+    opacity: 0.7;
+}
+
 .content {
     text-align: center;
     padding: 1px 16px;
@@ -86,8 +120,8 @@ th {
 }
 
 .mylogo {
-    padding-top: 30px;
-    padding-bottom: 130px;
+    padding-top: 70px;
+    padding-bottom: 150px;
 }
 
 input[type=submit] {
@@ -98,13 +132,13 @@ input[type=submit] {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  }
+}
   
-  input[type=submit]:hover {
+input[type=submit]:hover {
     background-color: rgb(255, 194, 113);
-  }
+}
 
-  input[type="text"], input[type="password"], textarea, select {
+input[type="text"], input[type="password"], textarea, select {
     border: 1px solid #ccc;
     border-radius: 3px;
     color: rgb(0, 0, 0);
@@ -118,4 +152,9 @@ input[type=submit] {
 
 .dropdown {
     padding: 0px 0px 70px 0px;
+}
+
+.heading {
+    font-size: 40px;
+    padding: 50px 0px 20px 0px;
 }

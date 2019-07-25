@@ -290,10 +290,10 @@ def map(building):
         return render_template('map.html', x =location_data[building][0], y =location_data[building][1])
     return 'no map'
     
-@app.route('/login')
+@app.route('/favourites')
 
-def login():
-    return render_template('login.html')
+def favourites():
+    return render_template('favourites.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

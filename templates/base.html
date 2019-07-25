@@ -23,11 +23,19 @@
         <div id="mySidepanel" class="sidepanel">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('favourites') }}">Favourites</a>
         </div>
 
         <div>
-            <button class="openbtn" onclick="openNav()">&#9776; </button>
+            <div class="sidebar">
+                <a href="javascript:void(0)" class="openbtn" onclick="openNav()">&#9776; </a>
+                <a href="{{ url_for('index') }}">
+                    <img src="{{ url_for('static', filename='images/home.png') }}" alt="home" height='35px'>
+                </a>
+                <a href="{{ url_for('favourites') }}">
+                    <img src="{{ url_for('static', filename='images/star.png') }}" alt="favourites" height='35px'>
+                </a>
+            </div>
             <div class="content">
                 {% block content %}
                 {% endblock %}
