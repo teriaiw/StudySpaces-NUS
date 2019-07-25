@@ -140,7 +140,7 @@ class Form(FlaskForm):
     ('Utwn', "Utown"), ('RVRC', "RVRC"), ('Yale', 'Yale'), ('Med', "Medicine"), ('Music', "Music")])
     building = SelectField('building', choices=[])
     time = SelectField('time', choices = get_time())
-    days = SelectField('days', choices = [(" "," "), ("Monday","Monday"), ("Tuesday", "Tuesday"), ("Wednesday", "Wednesday"), ("Thursday", "Thursday"), ("Friday", "Friday"), ("Saturday", "Saturday"), ("Sunday", "Sunday")])
+    days = SelectField('days', choices = [(" ","Today"), ("Monday","Monday"), ("Tuesday", "Tuesday"), ("Wednesday", "Wednesday"), ("Thursday", "Thursday"), ("Friday", "Friday"), ("Saturday", "Saturday"), ("Sunday", "Sunday")])
 
 class Slot():
     def __init__(self, code, name, slot):
