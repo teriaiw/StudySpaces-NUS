@@ -2,14 +2,18 @@
 
 {% block content %}
 
-<img src="images/logo.png" alt="logo">
+<div class="mylogo">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" height='120px'>
+</div>
 
-<form method="POST">
-{{ form.csrf_token }}
-{{ form.faculty }}
-{{ form.building }}
-{{ form.time }}
-<input type="submit">
+<div class="form-group dropdown">
+    <form method="POST">
+        {{ form.csrf_token }}
+        {{ form.faculty }}
+        {{ form.building }}
+        {{ form.time }}
+</div>
+<input type="submit" value="Generate">
 </form>
 
 <script>
