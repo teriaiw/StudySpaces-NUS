@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, Blueprint
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 from flask_wtf import FlaskForm
 from wtforms import SelectField
 import requests
@@ -142,16 +143,16 @@ class Form(FlaskForm):
     days = SelectField('days', choices = [(" "," "), ("Monday","Monday"), ("Tuesday", "Tuesday"), ("Wednesday", "Wednesday"), ("Thursday", "Thursday"), ("Friday", "Friday"), ("Saturday", "Saturday"), ("Sunday", "Sunday")])
 
 class Slot():
-	def __init__(self, code, name, slot):
-		self.code = code
-		self.name = name
-		self.lesson_type = slot.get("LessonType")
-		self.class_num = slot.get("ClassNo")
-		self.venue = slot.get("Venue")
-		self.start_time = slot.get("StartTime")
-		self.end_time = slot.get("EndTime")
-		self.day = slot.get("DayText")
-		self.week = slot.get("WeekText")
+    def __init__(self, code, name, slot):
+        self.code = code
+        self.name = name
+        self.lesson_type = slot.get("LessonType")
+        self.class_num = slot.get("ClassNo")
+        self.venue = slot.get("Venue")
+        self.start_time = slot.get("StartTime")
+        self.end_time = slot.get("EndTime")
+        self.day = slot.get("DayText")
+        self.week = slot.get("WeekText")
 
 		def str():
 			return self.venue + ''
@@ -308,7 +309,11 @@ def map(building):
 
         return render_template('map.html', x =location_data[building][0], y =location_data[building][1])
     return 'no map'
+    
+@app.route('/favourites')
 
+def favourites():
+    return render_template('favourites.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

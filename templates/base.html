@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>StudySpaces@NUS</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <section>
+        <div id="mySidepanel" class="sidepanel">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('favourites') }}">Favourites</a>
+        </div>
+
+        <div>
+            <div class="sidebar">
+                <a href="javascript:void(0)" class="openbtn" onclick="openNav()">&#9776; </a>
+                <a href="{{ url_for('index') }}">
+                    <img src="{{ url_for('static', filename='images/home.png') }}" alt="home" height='35px'>
+                </a>
+                <a href="{{ url_for('favourites') }}">
+                    <img src="{{ url_for('static', filename='images/star.png') }}" alt="favourites" height='35px'>
+                </a>
+            </div>
+            <div class="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+        <div id="overlay"></div>
+        
+        <script>
+            function openNav() {
+                document.getElementById("mySidepanel").style.width = "250px";
+                document.getElementById("overlay").style.display = "block";
+            }
+            
+            function closeNav() {
+                document.getElementById("mySidepanel").style.width = "0px";
+                document.getElementById("overlay").style.display = "none";
+            }
+        </script>
+    </section>
+</body>
+
+</html>

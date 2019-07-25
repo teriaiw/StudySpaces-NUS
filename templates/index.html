@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,29 +16,47 @@
     {{ form.days }}
     <input type="submit">
     </form>
+=======
+{% extends "base.html" %}
 
-    <script>
-        var faculty_select = document.getElementById("faculty");
-        var building_select = document.getElementById("building");
+{% block content %}
 
-        faculty_select.onchange = function()  {
+<div class="mylogo">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" height='120px'>
+</div>
 
-            faculty = faculty_select.value;
+<div class="form-group dropdown">
+    <form method="POST">
+        {{ form.csrf_token }}
+        {{ form.faculty }}
+        {{ form.building }}
+        {{ form.time }}
+</div>
+<input type="submit" value="Generate">
+</form>
+>>>>>>> styling
 
-            fetch('/building/' + faculty).then(function(response) {
+<script>
+    var faculty_select = document.getElementById("faculty");
+    var building_select = document.getElementById("building");
 
-                response.json().then(function(data) {
-                    var optionHTML = '';
+    faculty_select.onchange = function()  {
 
-                    for (var building of data.cities) {
-                        optionHTML += '<option value="' + building.id + '">' + building.name + '</option>';
-                    }
+        faculty = faculty_select.value;
 
-                    building_select.innerHTML = optionHTML;
-                })
+        fetch('/building/' + faculty).then(function(response) {
 
-            });
-        }
-    </script>
-</body>
-</html>
+            response.json().then(function(data) {
+                var optionHTML = '';
+
+                for (var building of data.cities) {
+                    optionHTML += '<option value="' + building.id + '">' + building.name + '</option>';
+                }
+
+                building_select.innerHTML = optionHTML;
+            })
+
+        });
+    }
+</script>
+{% endblock %}

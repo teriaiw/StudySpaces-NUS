@@ -1,0 +1,160 @@
+﻿@charset "UTF-8";
+
+/* The sidepanel menu */
+.sidepanel {
+    height: 100%; /* Specify a height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: rgb(19, 52, 90); /* Navy */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
+}
+
+/* The sidepanel links */
+.sidepanel a {
+    padding: 15px 8px 15px 0px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidepanel a:hover {
+    background-color: rgb(19, 52, 90);
+    opacity: 0.5;
+}
+
+/* Position and style the close button (top right corner) */
+.sidepanel .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 40px;
+    margin-left: 50px;
+}
+
+/* Style the button that is used to open the sidepanel */
+.openbtn {
+    font-size: 30px;
+    cursor: pointer;
+    background-color: rgb(19, 52, 90);
+    color: white;
+    border: none;
+    margin-left: 4px;
+}
+
+.openbtn:hover {
+    background-color: rgb(19, 52, 90);
+    opacity: 0.7;
+}
+
+#overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 0; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+}
+
+/* The side navigation menu */
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 70px;
+    background-color: rgb(19, 52, 90);
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    align-content: center;
+}
+
+/* Sidebar links */
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 20px 8px 20px 16px;
+    text-decoration: none;
+    border-bottom: 1px solid white;
+}
+
+/* Active/current link */
+.sidebar a.active {
+    background-color: rgb(39, 82, 133);
+    color: white;
+}
+
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+    background-color: rgb(19, 52, 90);
+    color: white;
+    opacity: 0.7;
+}
+
+.content {
+    text-align: center;
+    padding: 1px 16px;
+    height: 100%;
+}
+
+td {
+    padding:2px 40px 5px 40px;
+}
+
+th {
+    padding:2px 40px 5px 40px;
+    font-size: 20px;
+}
+
+.mylogo {
+    padding-top: 70px;
+    padding-bottom: 150px;
+}
+
+input[type=submit] {
+    background-color: rgb(235, 152, 45);
+    color: black;
+    padding: 12px 20px;
+    font-size: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+  
+input[type=submit]:hover {
+    background-color: rgb(255, 194, 113);
+}
+
+input[type="text"], input[type="password"], textarea, select {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: rgb(0, 0, 0);
+    display: inline-block;
+    font-size: 20px;
+    height: 100%;
+    line-height: 18px;
+    padding: 4px;
+    width: 210px;
+}
+
+.dropdown {
+    padding: 0px 0px 70px 0px;
+}
+
+.heading {
+    font-size: 40px;
+    padding: 50px 0px 20px 0px;
+}

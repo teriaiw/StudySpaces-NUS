@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-<body>
-  <h1>Rooms Available</h1>
-    <table>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="heading">Rooms Available</div>
+<br/>
+  <table align="center" class="table-hover table-responsive">
+    <thead>
       <tr>
         <th>Building</th>
         <th>Venue</th>
@@ -14,7 +12,9 @@
         <th>Next Class Name</th>
         <th>Map + {{list_size}}</th>
       </tr>
+    </thead>
 
+<<<<<<< HEAD
         {% for i,j in results %}
         <tr>
           <td>{{i[0]}}</td>
@@ -24,7 +24,18 @@
           <td><a href="{{url_for('map',building=i[0])}}" target = "_blank"> Map</a></td>
         </tr>
         {% endfor %}
+=======
+    {% for venue in venues %}
+    <tbody>
+      <tr>
+        <td>{{venue[0]}}</td>
+        <td>{{venue[1]}}</td>
+        <td>{{0}}</td>
+        <td><a href="{{url_for('map',building=venue[0])}}" target = "_blank"> Map</a></td>
+      </tr>
+    </tbody>
+      {% endfor %}
+>>>>>>> styling
 
-    </table>
-</body>
-</html>
+  </table>
+{% endblock %}
