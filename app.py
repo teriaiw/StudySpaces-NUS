@@ -154,8 +154,8 @@ class Slot():
         self.day = slot.get("DayText")
         self.week = slot.get("WeekText")
 
-		def str():
-			return self.venue + ''
+        def str():
+            return self.venue + ''
 
 
 @app.route('/', methods=['GET', 'POST'])
