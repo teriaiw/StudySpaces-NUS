@@ -14,7 +14,6 @@
       </tr>
     </thead>
 
-<<<<<<< HEAD
         {% for i,j in results %}
         <tr>
           <td>{{i[0]}}</td>
@@ -24,18 +23,6 @@
           <td><a href="{{url_for('map',building=i[0])}}" target = "_blank"> Map</a></td>
         </tr>
         {% endfor %}
-=======
-    {% for venue in venues %}
-    <tbody>
-      <tr>
-        <td>{{venue[0]}}</td>
-        <td>{{venue[1]}}</td>
-        <td>{{0}}</td>
-        <td><a href="{{url_for('map',building=venue[0])}}" target = "_blank"> Map</a></td>
-      </tr>
-    </tbody>
-      {% endfor %}
->>>>>>> styling
 
   </table>
 {% endblock %}

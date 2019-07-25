@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,25 +15,6 @@
     {{ form.days }}
     <input type="submit">
     </form>
-=======
-{% extends "base.html" %}
-
-{% block content %}
-
-<div class="mylogo">
-    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" height='120px'>
-</div>
-
-<div class="form-group dropdown">
-    <form method="POST">
-        {{ form.csrf_token }}
-        {{ form.faculty }}
-        {{ form.building }}
-        {{ form.time }}
-</div>
-<input type="submit" value="Generate">
-</form>
->>>>>>> styling
 
 <script>
     var faculty_select = document.getElementById("faculty");
@@ -59,4 +39,3 @@
         });
     }
 </script>
-{% endblock %}
