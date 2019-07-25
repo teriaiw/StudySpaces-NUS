@@ -1,41 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-<body>
-    <strong>Choose your current location and click submit!</strong> <br>
-    Current day:{{day}}
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="mylogo">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" height='120px'>
+</div>
+
+<div class="form-group dropdown">
     <form method="POST">
-    {{ form.csrf_token }}
-    {{ form.faculty }}
-    {{ form.building }}
-    {{ form.time }}
-    {{ form.days }}
-    <input type="submit">
-    </form>
+        {{ form.csrf_token }}
+        {{ form.faculty }}
+        {{ form.building }}
+        {{ form.time }}
+        {{form.days}}
+</div>
+<input type="submit" value="Generate">
+</form>
 
 <script>
     var faculty_select = document.getElementById("faculty");
     var building_select = document.getElementById("building");
-
     faculty_select.onchange = function()  {
-
         faculty = faculty_select.value;
-
         fetch('/building/' + faculty).then(function(response) {
-
             response.json().then(function(data) {
                 var optionHTML = '';
-
                 for (var building of data.cities) {
                     optionHTML += '<option value="' + building.id + '">' + building.name + '</option>';
                 }
-
                 building_select.innerHTML = optionHTML;
             })
-
         });
     }
 </script>
+{% endblock %}
