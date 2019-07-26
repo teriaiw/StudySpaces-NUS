@@ -1,11 +1,15 @@
 ﻿@charset "UTF-8";
 
+html {
+    scroll-behavior: smooth;
+}
+
 /* The sidepanel menu */
 .sidepanel {
     height: 100%; /* Specify a height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
+    z-index: 2; /* Stay on top */
     top: 0;
     left: 0;
     background-color: rgb(19, 52, 90); /* Navy */
@@ -66,7 +70,7 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-    z-index: 0; /* Specify a stack order in case you're using a different order for other elements */
+    z-index: 1; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
 }
 
@@ -110,33 +114,46 @@
     height: 100%;
 }
 
+table {
+    table-layout: fixed;
+}
+
 td {
-    padding:2px 40px 5px 40px;
+    padding:2px 35px 5px 35px;
+    word-wrap: break-word;
 }
 
 th {
-    padding:2px 40px 5px 40px;
+    padding:2px 35px 5px 35px;
     font-size: 20px;
+    word-wrap: break-word;
 }
 
 .mylogo {
     padding-top: 70px;
-    padding-bottom: 150px;
+    padding-bottom: 80px;
 }
 
 input[type=submit] {
-    background-color: rgb(235, 152, 45);
+    background-color: rgb(235, 157, 57);
     color: black;
-    padding: 12px 20px;
+    padding: 12px 25px;
     font-size: 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
+    box-shadow: 0 7px #999;
 }
   
 input[type=submit]:hover {
     background-color: rgb(255, 194, 113);
 }
+
+input[type=submit]:active {
+    background-color: rgb(255, 194, 113);
+    box-shadow: 0 5px #666;
+    transform: translateY(2px);
+  }
 
 input[type="text"], input[type="password"], textarea, select {
     border: 1px solid #ccc;
@@ -156,5 +173,24 @@ input[type="text"], input[type="password"], textarea, select {
 
 .heading {
     font-size: 40px;
-    padding: 50px 0px 20px 0px;
+    padding: 50px 0px 30px 0px;
+}
+
+#myBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 30px; /* Place the button at the bottom of the page */
+    right: 50px; /* Place the button 30px from the right */
+    z-index: 1; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    color: rgb(235, 152, 45);
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 0px;
+    border-radius: 0px; /* Rounded corners */
+    font-size: 60px;
+}
+
+#myBtn:hover {
+    color:rgb(255, 194, 113);
 }

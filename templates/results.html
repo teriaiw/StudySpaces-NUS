@@ -1,28 +1,51 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="heading">{{form_data[0]}}</div>
+<div class="heading">Rooms Available</div>
+<h4 style="color: rgb(224, 2, 2)">{{form_data[0]}}</h4>
 <br/>
-  <table align="center" class="table-hover table-responsive">
-    <thead>
+<table align="center" class="table-hover table-responsive">
+  <thead>
+    <tr>
+      <th>Building</th>
+      <th>Venue</th>
+      <th>Available Until</th>
+      <th>Next Class</th>
+      <th>Map</th>
+    </tr>
+  </thead>
+
+      {% for i,j in results %}
       <tr>
-        <th>Building</th>
-        <th>Venue</th>
-        <th>Time Available Until</th>
-        <th>Next Class</th>
-        <th>Map</th>
+        <td>{{i[0]}}</td>
+        <td>{{i[1]}}</td>
+        <td>{{j[0]}}</td>
+        <td>{{j[1]}}</td>
+        <td><a href="{{url_for('map',building=i[0])}}" target = "_blank"> Map</a></td>
       </tr>
-    </thead>
+      {% endfor %}
 
-        {% for i,j in results %}
-        <tr>
-          <td>{{i[0]}}</td>
-          <td>{{i[1]}}</td>
-          <td>{{j[0]}}</td>
-          <td>{{j[1]}}</td>
-          <td><a href="{{url_for('map',building=i[0])}}" target = "_blank"> Map</a></td>
-        </tr>
-        {% endfor %}
+</table>
 
-  </table>
+<a href="javascript:void(0)" onclick="topFunction()" id="myBtn" title="Go to top">&#8679</a>
+<script>
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      document.getElementById("myBtn").style.display = "block";
+    } else {
+      document.getElementById("myBtn").style.display = "none";
+    }
+  }
+
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+</script>
+
 {% endblock %}

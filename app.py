@@ -194,9 +194,9 @@ def index():
 
         form_data = []
         if (str(form.days.data) == " "):
-            form_data.append("Showing Free Classrooms in " + str(form.faculty.data) + " at " + str(form.time.data) + " on " + day)
+            form_data.append("*Showing results for Free Classrooms in " + str(form.faculty.data) + " at " + str(form.time.data) + " on " + day)
         else:
-            form_data.append("Showing Free Classrooms in " + str(form.faculty.data) + " at " + str(form.time.data) + " on " + str(form.days.data))
+            form_data.append("*Showing results for Free Classrooms in " + str(form.faculty.data) + " at " + str(form.time.data) + " on " + str(form.days.data))
 
         for mod in timetable:
             name = mod.get("ModuleCode")
