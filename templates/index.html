@@ -5,6 +5,7 @@
 <div class="mylogo">
     <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" height='120px'>
 </div>
+<h1>Welcome {{name}}</h1>
 <h2>Looking For a Free Classroom?</h2>
 <h3>Please select Faculty, Time and Day.</h3>
 <br/>
@@ -18,6 +19,7 @@
         {{form.days}}
 </div>
 <input type="submit" value="Generate">
+<a href="{{ url_for('logout') }}">Log Out</a>
 </form>
 
 <script>

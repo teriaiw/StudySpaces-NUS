@@ -1,8 +1,12 @@
-from flask import Flask, render_template, request, jsonify, Blueprint
+from flask import Flask, render_template, request, jsonify, Blueprint, redirect, flash, session, url_for
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
+from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required, fresh_login_required
+from urllib.parse import urlparse, urljoin
 from flask_wtf import FlaskForm
-from wtforms import SelectField
+from wtforms import SelectField, StringField, PasswordField, BooleanField
+from wtforms.validators import InputRequired, Email, Length
+from flask_bootstrap import Bootstrap
+from werkzeug.security import generate_password_hash, check_password_hash
 import requests
 import json
 import folium
@@ -11,8 +15,10 @@ import datetime
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SECRET_KEY'] = 'secret'
-
+app.config['USE_SESSION_FOR_NEXT'] = True
 db = SQLAlchemy(app)
+
+Bootstrap(app)
 
 ACAD_YEAR = "2018-2019"
 SEM = "1"
@@ -156,7 +162,8 @@ class Slot():
             return self.venue + ''
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/home', methods=['GET', 'POST'])
+@login_required
 def index():
     
     form = Form()
@@ -235,7 +242,7 @@ def index():
         #return '<h1>Faculty: {}, Building: {}, Time requested: {}</h1>'.format(form.faculty.data, building.name, form.time.data)
 
 
-    return render_template('index.html', form=form, day = day)
+    return render_template('index.html', form=form, day = day, name = current_user.username)
 
 @app.route('/building/<faculty>')
 def building(faculty):
@@ -318,6 +325,75 @@ def map(building):
 
 def favourites():
     return render_template('favourites.html')
+
+#login functions below
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+login_manager.login_message = 'Please log in before continuing'
+
+class LoginForm(FlaskForm):
+    username = StringField('username', validators = [InputRequired(), Length(min = 4, max = 15)])
+    password = PasswordField('password', validators = [InputRequired(), Length(min = 4, max = 15)])
+    remember = BooleanField('remember me')
+
+class RegisterForm(FlaskForm):
+    email = StringField('email', validators = [InputRequired(), Email(message ='Invalid email'), Length(max=50)])
+    username = StringField('username', validators = [InputRequired(), Length(min = 4, max = 15)])
+    password = PasswordField('password', validators = [InputRequired(), Length(min = 4, max = 15)])
+
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(15), unique=True)
+    email = db.Column(db.String(50), unique = True)
+    password = db.Column(db.String(80), unique = True)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+@app.route('/', methods=['GET', 'POST']) #login
+def login():
+    form = LoginForm()
+
+
+    if form.validate_on_submit(): #checking stuff in database
+        user = User.query.filter_by(username = form.username.data).first()
+        if user:
+            if check_password_hash(user.password,form.password.data):
+                login_user(user, remember = form.remember.data)
+                return redirect(url_for('index'))
+
+        return render_template('simplemessage.html', message = 'Invalid Username or Password')
+        #return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
+
+    return render_template('login.html', form = form)
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    form = RegisterForm()
+
+    if form.validate_on_submit(): #adding stuff to database below
+        hashed_password = generate_password_hash(form.password.data, method = 'sha256')
+        new_user = User(username = form.username.data, email= form.email.data, password = hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+        return render_template('simplemessage.html', message = 'New User Has Been Created')
+        #return '<h1>' + form.username.data + ' ' + form.password.data + ' ' + form.email.data + '</h1>'
+
+    return render_template('signup.html', form=form)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+@app.route('/profile') #test purposes
+@login_required
+def home():
+    return 'The current user is ' + current_user.username
+
 
 if __name__ == '__main__':
     app.run(debug=True)
