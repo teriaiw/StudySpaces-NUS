@@ -31,3 +31,7 @@ input[type="text"], input[type="password"], textarea, select {
     border-radius: 4px;
     cursor: pointer;
 }
+
+.buttons {
+    margin: 0px auto;
+}

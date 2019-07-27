@@ -24,9 +24,11 @@ Sign Up
     {{ wtf.form_field(form.email) }}
     {{ wtf.form_field(form.password) }}
     <br/>
+    <div class="buttons">
     <button id="login-btn" type="submit">Sign Up</button><br/>
     <br/>
     <a href="{{ url_for('login') }}">Back to login</a>
+    </div>
   </form>
 
 </div> <!-- /container -->
