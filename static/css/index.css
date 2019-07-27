@@ -1,0 +1,38 @@
+/* css for generator */
+
+input[type=submit] {
+    background-color: orange;
+    color: black;
+    padding: 12px 25px;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 7px #999;
+}
+  
+input[type=submit]:hover {
+    background-color: rgb(255, 194, 113);
+}
+
+input[type=submit]:active {
+    background-color: rgb(255, 194, 113);
+    box-shadow: 0 5px #666;
+    transform: translateY(2px);
+  }
+
+input[type="text"], input[type="password"], textarea, select {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: rgb(0, 0, 0);
+    display: inline-block;
+    font-size: 20px;
+    height: 100%;
+    line-height: 18px;
+    padding: 4px;
+    width: 210px;
+}
+
+.dropdown {
+    padding: 0px 0px 50px 0px;
+}

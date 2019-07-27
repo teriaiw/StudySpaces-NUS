@@ -333,14 +333,14 @@ login_manager.login_view = 'login'
 login_manager.login_message = 'Please log in before continuing'
 
 class LoginForm(FlaskForm):
-    username = StringField('username', validators = [InputRequired(), Length(min = 4, max = 15)])
-    password = PasswordField('password', validators = [InputRequired(), Length(min = 4, max = 15)])
-    remember = BooleanField('remember me')
+    username = StringField('Username', validators = [InputRequired(), Length(min = 4, max = 15)])
+    password = PasswordField('Password', validators = [InputRequired(), Length(min = 4, max = 15)])
+    remember = BooleanField('Remember me')
 
 class RegisterForm(FlaskForm):
-    email = StringField('email', validators = [InputRequired(), Email(message ='Invalid email'), Length(max=50)])
-    username = StringField('username', validators = [InputRequired(), Length(min = 4, max = 15)])
-    password = PasswordField('password', validators = [InputRequired(), Length(min = 4, max = 15)])
+    email = StringField('Email', validators = [InputRequired(), Email(message ='Invalid email'), Length(max=50)])
+    username = StringField('Username', validators = [InputRequired(), Length(min = 4, max = 15)])
+    password = PasswordField('Password', validators = [InputRequired(), Length(min = 4, max = 15)])
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)

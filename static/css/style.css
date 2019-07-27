@@ -1,7 +1,20 @@
 ﻿@charset "UTF-8";
+@import url("results.css");
+@import url("index.css");
 
 html {
     scroll-behavior: smooth;
+}
+
+.content {
+    text-align: center;
+    padding: 1px 16px;
+    height: 100%;
+}
+
+.mylogo {
+    padding-top: 70px;
+    padding-bottom: 70px;
 }
 
 /* The sidepanel menu */
@@ -18,22 +31,45 @@ html {
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
 }
 
+#user-full {
+    width: 55px;
+    height: 55px;
+    background-color: rgb(255, 145, 0);
+    border-radius: 30px;
+    color: white;
+    font-size: 33px;
+    border: none;
+    outline: none;
+    align-content: center;
+    padding-bottom: 1px;
+    cursor: default;
+}
+
+.user-full {
+    display: block;
+    padding: 25px 7px 25px 20px;
+    text-decoration: none;
+    border-bottom: none;
+    color: white;
+    font-size: 25px;
+}
+
 /* The sidepanel links */
 .sidepanel a {
-    padding: 15px 8px 15px 0px;
-    text-align: center;
-    font-family: 'Courier New', Courier, monospace;
+    padding: 15px 15px;
     text-decoration: none;
+    font-family: monospace;
     font-size: 25px;
     color: white;
     display: block;
-    transition: 0.3s;
+    transition: 0.05s;
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
 }
 
 /* When you mouse over the navigation links, change their color */
 .sidepanel a:hover {
-    background-color: rgb(19, 52, 90);
-    opacity: 0.5;
+    background-color: rgb(39, 82, 133);
 }
 
 /* Position and style the close button (top right corner) */
@@ -43,21 +79,27 @@ html {
     right: 25px;
     font-size: 40px;
     margin-left: 50px;
+    border-bottom: none;
+    border-top: none;
 }
 
-/* Style the button that is used to open the sidepanel */
-.openbtn {
-    font-size: 30px;
-    cursor: pointer;
+.sidepanel .closebtn:hover {
     background-color: rgb(19, 52, 90);
-    color: white;
-    border: none;
-    margin-left: 4px;
+    opacity: 0.5;
 }
 
-.openbtn:hover {
+.sidepanel .logout {
+    position: absolute;
+    bottom: 15px;
+    right:40px;
+    font-size: 20px;
+    border-bottom: none;
+    border-top: none;
+}
+
+.sidepanel .logout:hover {
     background-color: rgb(19, 52, 90);
-    opacity: 0.7;
+    opacity: 0.6;
 }
 
 #overlay {
@@ -69,16 +111,16 @@ html {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-    z-index: 1; /* Specify a stack order in case you're using a different order for other elements */
-    cursor: pointer; /* Add a pointer on hover */
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1;
+    cursor: pointer;
 }
 
 /* The side navigation menu */
 .sidebar {
     margin: 0;
     padding: 0;
-    width: 70px;
+    width: 78px;
     background-color: rgb(19, 52, 90);
     position: fixed;
     height: 100%;
@@ -86,111 +128,51 @@ html {
     align-content: center;
 }
 
+#user {
+    width: 55px;
+    height: 55px;
+    background-color: rgb(255, 145, 0);
+    border-radius: 30px;
+    color: white;
+    font-size: 33px;
+    border: none;
+    outline: none;
+    align-content: center;
+    padding-bottom: 1px;
+    cursor: default;
+}
+
+.user {
+    display: block;
+    padding: 30px 7px 5px 11px;
+    text-decoration: none;
+    border-bottom: none;
+}
+
 /* Sidebar links */
 .sidebar a {
     display: block;
     color: white;
-    padding: 20px 8px 20px 16px;
+    padding: 15px 16px;
     text-decoration: none;
     border-bottom: 1px solid white;
 }
 
-/* Active/current link */
-.sidebar a.active {
+/* Links on mouse-over */
+.sidebar a:hover {
     background-color: rgb(39, 82, 133);
     color: white;
 }
 
-/* Links on mouse-over */
-.sidebar a:hover:not(.active) {
-    background-color: rgb(19, 52, 90);
-    color: white;
-    opacity: 0.7;
-}
-
-.content {
-    text-align: center;
-    padding: 1px 16px;
-    height: 100%;
-}
-
-table {
-    table-layout: fixed;
-}
-
-td {
-    padding:2px 35px 5px 35px;
-    word-wrap: break-word;
-}
-
-th {
-    padding:2px 35px 5px 35px;
-    font-size: 20px;
-    word-wrap: break-word;
-}
-
-.mylogo {
-    padding-top: 70px;
-    padding-bottom: 80px;
-}
-
-input[type=submit] {
-    background-color: rgb(235, 157, 57);
-    color: black;
-    padding: 12px 25px;
-    font-size: 20px;
-    border: none;
-    border-radius: 10px;
+/* Style the button that is used to open the sidepanel */
+.sidebar .openbtn {
+    font-size: 37px;
     cursor: pointer;
-    box-shadow: 0 7px #999;
-}
-  
-input[type=submit]:hover {
-    background-color: rgb(255, 194, 113);
+    color: white;
+    margin-left: 4px;
 }
 
-input[type=submit]:active {
-    background-color: rgb(255, 194, 113);
-    box-shadow: 0 5px #666;
-    transform: translateY(2px);
-  }
-
-input[type="text"], input[type="password"], textarea, select {
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    color: rgb(0, 0, 0);
-    display: inline-block;
-    font-size: 20px;
-    height: 100%;
-    line-height: 18px;
-    padding: 4px;
-    width: 210px;
-}
-
-.dropdown {
-    padding: 0px 0px 70px 0px;
-}
-
-.heading {
-    font-size: 40px;
-    padding: 50px 0px 30px 0px;
-}
-
-#myBtn {
-    display: none; /* Hidden by default */
-    position: fixed; /* Fixed/sticky position */
-    bottom: 30px; /* Place the button at the bottom of the page */
-    right: 50px; /* Place the button 30px from the right */
-    z-index: 1; /* Make sure it does not overlap */
-    border: none; /* Remove borders */
-    outline: none; /* Remove outline */
-    color: rgb(235, 152, 45);
-    cursor: pointer; /* Add a mouse pointer on hover */
-    padding: 0px;
-    border-radius: 0px; /* Rounded corners */
-    font-size: 60px;
-}
-
-#myBtn:hover {
-    color:rgb(255, 194, 113);
+.sidebar .openbtn:hover {
+    background-color: rgb(19, 52, 90);
+    opacity: 0.8;
 }

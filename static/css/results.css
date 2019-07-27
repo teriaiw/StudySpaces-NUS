@@ -1,0 +1,42 @@
+/* css for Results page */
+
+.heading {
+    font-size: 40px;
+    padding: 50px 0px 30px 0px;
+}
+
+table {
+    table-layout: fixed;
+}
+
+td {
+    padding:2px 35px 5px 35px;
+    word-wrap: break-word;
+}
+
+th {
+    padding:2px 35px 5px 35px;
+    font-size: 20px;
+    word-wrap: break-word;
+}
+
+/* Back to top button */
+
+#topBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 30px; /* Place the button at the bottom of the page */
+    right: 50px;
+    z-index: 1; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    color: rgb(235, 152, 45);
+    cursor: pointer;
+    padding: 0px;
+    border-radius: 0px; /* Rounded corners */
+    font-size: 60px;
+}
+
+#topBtn:hover {
+    opacity: 0.8;
+}

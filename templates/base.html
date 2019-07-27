@@ -21,19 +21,25 @@
 <body>
     <section>
         <div id="mySidepanel" class="sidepanel">
+            <div class="user-full"><button id="user-full">{{(current_user.username[0])}}</button> {{name}}</div>
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{ url_for('favourites') }}">Favourites</a>
+            <a href="{{ url_for('index') }}">
+                    <img src="{{ url_for('static', filename='images/home.png') }}" alt="home" width='43px'> Home</a>
+            <a href="{{ url_for('favourites') }}">
+                    <img src="{{ url_for('static', filename='images/star.png') }}" alt="favourites" width='43px'> Favourites</a>
+            <a href="{{ url_for('logout') }}" class="logout">
+                    <img src="{{ url_for('static', filename='images/logout.png') }}" alt="logout" width='20px'> Log Out</a>
         </div>
 
         <div>
             <div class="sidebar">
+                <div class="user"><button id="user">{{(current_user.username[0])}}</button></div>
                 <a href="javascript:void(0)" class="openbtn" onclick="openNav()">&#9776; </a>
                 <a href="{{ url_for('index') }}">
-                    <img src="{{ url_for('static', filename='images/home.png') }}" alt="home" height='35px'>
+                    <img src="{{ url_for('static', filename='images/home.png') }}" alt="home" width='43px'>
                 </a>
                 <a href="{{ url_for('favourites') }}">
-                    <img src="{{ url_for('static', filename='images/star.png') }}" alt="favourites" height='35px'>
+                    <img src="{{ url_for('static', filename='images/star.png') }}" alt="favourites" width='43px'>
                 </a>
             </div>
             <div class="content">
