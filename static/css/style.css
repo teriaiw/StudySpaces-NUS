@@ -91,7 +91,7 @@ html {
 .sidepanel .logout {
     position: absolute;
     bottom: 15px;
-    right:40px;
+    left:10px;
     font-size: 20px;
     border-bottom: none;
     border-top: none;

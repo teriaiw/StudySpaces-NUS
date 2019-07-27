@@ -9,12 +9,19 @@
 }
 
 .mylogo {
-    margin: 10px auto;
+    margin: 20px auto;
 }
 
 form { 
     margin: 30px auto; 
-    width:350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type="text"], input[type="password"], textarea, select {
+    width: 350px;
 }
 
 #login-btn {
