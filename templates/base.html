@@ -21,7 +21,7 @@
 <body>
     <section>
         <div id="mySidepanel" class="sidepanel">
-            <div class="user-full"><button id="user-full">{{(current_user.username[0])}}</button> {{name}}</div>
+            <div class="user-full"><button id="user-full">{{(current_user.username[0])}}</button>&nbsp; {{current_user.username}}</div>
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <a href="{{ url_for('index') }}">
                     <img src="{{ url_for('static', filename='images/home.png') }}" alt="home" width='43px'> Home</a>
@@ -34,7 +34,7 @@
         <div>
             <div class="sidebar">
                 <div class="user"><button id="user">{{(current_user.username[0])}}</button></div>
-                <a href="javascript:void(0)" class="openbtn" onclick="openNav()">&#9776; </a>
+                <a href="javascript:void(0)" class="openbtn" onclick="openNav()"> &#9776;</a>
                 <a href="{{ url_for('index') }}">
                     <img src="{{ url_for('static', filename='images/home.png') }}" alt="home" width='43px'>
                 </a>
