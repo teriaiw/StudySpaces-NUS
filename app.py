@@ -226,11 +226,11 @@ def index():
                 for slot in mod.get("Timetable", ()):
                     if form.time.data <= slot.get("StartTime") and (slot.get("DayText") == day) and slot.get("Venue") == venue[1] and int(slot.get("StartTime")) < end_time and slot.get("Venue") != None:
                         end_time = int(slot.get("StartTime"))
-                        taken_by =  (str(end_time), name)
+                        taken_by =  ('{:04d}'.format(int(end_time)), name)
                         #taken_by = mod.get("ModuleCode")
                         #cant use moduleCode to find next class because JSON cant seem to be filtered by None
             if taken_by == "":
-                end_time_list.append(("2400","No More Classes"))
+                end_time_list.append(("2359","No More Classes"))
             else:
                 end_time_list.append(taken_by)
                         
